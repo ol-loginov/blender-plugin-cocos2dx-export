@@ -1,0 +1,1 @@
+# blender-plugin-cocos2dx-export
