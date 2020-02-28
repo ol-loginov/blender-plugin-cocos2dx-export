@@ -4,10 +4,9 @@ from bpy_extras.io_utils import (axis_conversion, ExportHelper, path_reference_m
 
 from . import ExportCocos2dx
 
-IOCocos2dxOrientationHelper = orientation_helper(axis_forward='-Z', axis_up='Y')
 
-
-class Command(bpy.types.Operator, ExportHelper, IOCocos2dxOrientationHelper):
+@orientation_helper(axis_forward='-Z', axis_up='Y')
+class Command(bpy.types.Operator, ExportHelper):
     """Export to a Cocos2d-x text file"""
 
     bl_idname = 'export_scene.cocos2dx'

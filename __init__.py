@@ -10,14 +10,8 @@ bl_info = {
     "category": "Import-Export"
 }
 
-if "bpy" in locals():
-    import importlib
-
-    importlib.reload('ExportCocos2dxCommand')
-else:
-    from . import ExportCocos2dxCommand
-
 import bpy
+from . import ExportCocos2dxCommand
 
 
 def menu_func_export(self, context):
@@ -26,11 +20,11 @@ def menu_func_export(self, context):
 
 def register():
     bpy.utils.register_class(ExportCocos2dxCommand.Command)
-    bpy.types.INFO_MT_file_export.append(menu_func_export)
+    bpy.types.TOPBAR_MT_file_export.append(menu_func_export)
 
 
 def unregister():
-    bpy.types.INFO_MT_file_export.remove(menu_func_export)
+    bpy.types.TOPBAR_MT_file_export.remove(menu_func_export)
     bpy.utils.unregister_class(ExportCocos2dxCommand.Command)
 
 
