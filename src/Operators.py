@@ -18,24 +18,24 @@ class ExportOperator(bpy.types.Operator, ExportHelper):
     bl_options = {'PRESET'}
 
     filename_ext = '.c3t'
-    filter_glob = StringProperty(default='*.c3t', options={'HIDDEN'})
+    filter_glob: StringProperty(default='*.c3t', options={'HIDDEN'})
 
     # context group
-    use_selection = BoolProperty(name="Selection Only", description="Export selected objects only", default=False)
+    use_selection: BoolProperty(name="Selection Only", description="Export selected objects only", default=False)
 
     # data group
-    export_normals = BoolProperty(name="Export Normals", description="Export one normal per face per per vertex, to represent flat faces and sharp edges", default=True)
+    export_normals: BoolProperty(name="Export Normals", description="Export one normal per face per per vertex, to represent flat faces and sharp edges", default=True)
 
-    export_uv_maps = BoolProperty(name="Export UVs", description="Exports the UV coordinates and the assigned textures", default=True)
+    export_uv_maps: BoolProperty(name="Export UVs", description="Exports the UV coordinates and the assigned textures", default=True)
 
     # object group
-    use_mesh_modifiers = BoolProperty(name="Apply Modifiers", description="Apply modifiers", default=True)
+    use_mesh_modifiers: BoolProperty(name="Apply Modifiers", description="Apply modifiers", default=True)
 
-    use_mesh_modifiers_render = BoolProperty(name="Use Modifiers Render Settings", description="Use render settings when applying modifiers to mesh objects", default=False)
+    use_mesh_modifiers_render: BoolProperty(name="Use Modifiers Render Settings", description="Use render settings when applying modifiers to mesh objects", default=False)
 
-    global_scale = FloatProperty(name="Scale", min=0.01, max=1000.0, description="Scaling factor applied to all exported objects", default=1.0)
+    global_scale: FloatProperty(name="Scale", min=0.01, max=1000.0, description="Scaling factor applied to all exported objects", default=1.0)
 
-    path_mode = path_reference_mode
+    path_mode: path_reference_mode
 
     check_extension = True
 
@@ -46,15 +46,11 @@ class ExportOperator(bpy.types.Operator, ExportHelper):
             'axis_forward',  # from IOCocos2dxOrientationHelper
             'axis_up',  # from IOCocos2dxOrientationHelper
             'check_existing',  # from ExportHelper
-            # 'filepath',  # from ExportHelper
+            'filepath',  # from ExportHelper
             'filter_glob',
             'global_scale',
             'path_mode'
         ))
-
-        if 'filepath' in keywords:
-            self.filepath = keywords['filepath']
-            del keywords['filepath']
 
         # Create a matrix which incorporates the global scale and the rotation to match Cocos2d-x's coordinate frame.
         global_matrix_conversion = axis_conversion(to_forward=self.axis_forward, to_up=self.axis_up)

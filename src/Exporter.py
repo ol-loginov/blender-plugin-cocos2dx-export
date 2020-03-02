@@ -7,6 +7,8 @@ from mathutils import Matrix
 import bpy
 import bpy_extras.io_utils
 
+TEXTURE_SUB_FOLDER = 'textures'
+
 
 def triangulate_mesh(mesh):
     import bmesh
@@ -195,7 +197,7 @@ class Exporter:
         texture_desc = OrderedDict()
         texture_desc['id'] = name
         texture_desc['filename'] = bpy_extras.io_utils.path_reference(
-            texture.image.filepath, self._source_directory, self._dest_directory, self._path_mode, "", self._copy_set,
+            texture.image.filepath, self._source_directory, self._dest_directory, self._path_mode, TEXTURE_SUB_FOLDER, self._copy_set,
             texture.image.library)
 
         texture_desc['type'] = 'DIFFUSE'
